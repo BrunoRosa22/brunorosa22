@@ -1,0 +1,116 @@
+/*PROGRAMANDO EM MYSQL */
+
+/* MUDANDO O DELIMITADOR */
+DELIMITER $
+
+/* STORED PROCEDURES */
+DELIMITER $
+
+CREATE PROCEDURE NOME()
+BEGIN
+	
+	QUALQUER PROGRAMAÇÃO
+
+END
+$
+
+CREATE PROCEDURE NOME_EMPRESA()
+BEGIN
+	
+	SELECT 'UNIVERSIDADE DOS DADOS' AS EMPRESA;
+
+END
+$
+/* CHAMANDO A PROCEDURE */
+CALL NOME_EMPRESA()$
++------------------------+
+| EMPRESA                |
++------------------------+
+| UNIVERSIDADE DOS DADOS |
++------------------------+
+
+/* PROCEDURES COM PARAMETROS */
+CREATE PROCEDURE CONTA()
+BEGIN
+	SELECT 10 + 10 AS CONTA;
+END
+$
+/*    */
+CALL CONTA()$
++-------+
+| CONTA |
++-------+
+|    20 |
++-------+
+
+DROP PROCEDURE CONTA$
+/* */
+CREATE PROCEDURE CONTA(NUMERO1 INT, NUMERO2 INT)
+BEGIN
+
+	SELECT NUMERO1 + NUMERO2 AS CONTA;
+END
+$
+
+CALL CONTA(100,50)$
++-------+
+| CONTA |
++-------+
+|   150 |
++-------+
+
+/* PROCEDURES NO MUNDO REAL */
+CREATE TABLE CURSOS(
+		ID_CURSO INT PRIMARY KEY AUTO_INCREMENT,
+		NOME VARCHAR(30) NOT NULL,
+		HORAS INT(3) NOT NULL,
+		VALOR FLOAT(10,2) NOT NULL
+		);
+
+INSERT INTO CURSOS VALUES(NULL,'JAVA',30,500.00);
+INSERT INTO CURSOS VALUES(NULL,'FUNDAMENTOS DE BANCOS DE DADOS',40,700.00);
+
+
+/* PROCEDURE PARA LER OS CURSOS */
+DELIMITER $
+
+CREATE PROCEDURE VISAO()
+BEGIN
+	SELECT NOME, HORAS, VALOR 
+	FROM CURSOS AS CURSO;
+END
+$
++--------------------------------+-------+--------+
+| NOME                           | HORAS | VALOR  |
++--------------------------------+-------+--------+
+| JAVA                           |    30 | 500.00 |
+| FUNDAMENTOS DE BANCOS DE DADOS |    40 | 700.00 |
++--------------------------------+-------+--------+
+
+/* CREATE PROCEDURE CADASTRO */
+CREATE PROCEDURE CADASTRO(	NOME VARCHAR(30), 
+							HORAS INT(3), 
+							VALOR FLOAT(10,2))
+BEGIN
+	INSERT INTO CURSOS VALUES(NULL, NOME, HORAS, VALOR);
+END
+$	
+
+CALL CADASTRO('PYTHON',50,200)$	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
